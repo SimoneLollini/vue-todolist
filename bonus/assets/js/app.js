@@ -22,7 +22,7 @@ createApp({
         return {
             tasks,
             newTask: '',
-
+            fail: false
         }
     },
     methods: {
@@ -31,10 +31,17 @@ createApp({
         //     console.log(this.tasks);
         // }
         addTask() {
-            this.tasks.unshift({
-                text: this.newTask,
-                done: false
-            })
+            if (this.newTask.length > 5) {
+                this.tasks.unshift({
+                    text: this.newTask,
+                    done: false
+                }),
+                    this.newTask = ''
+                this.fail = false
+            } else {
+                this.fail = true
+            }
+
 
         },
         statusDone(index) {
@@ -47,4 +54,5 @@ createApp({
     },
 }).mount('#app')
 
-// console.log(tasks);
+// 1- oltre al click sul pulsante, intercettare anche il tasto ENTER per aggiungere il todo alla lista
+// 2- cliccando sul testo dell'item, invertire il valore della proprietà done del todo corrispondente (se done era uguale a false, impostare true e viceversa)

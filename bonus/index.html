@@ -18,16 +18,24 @@
 
     <div id="app">
         <div class="container m-5 d-flex flex-column align-items-center">
-            <div class="wrapper_to_add">
-                <input type="text" placeholder="ex. new task" v-model="newTask">
+            <div class="wrapper_to_add d-flex">
+                <input type="text" placeholder="Add new task here" v-model="newTask" @keyup.enter="addTask">
                 <button class="btn btn-success mx-4" @click="addTask">Add task</button>
+                <p class="text-danger" v-if="fail">
+                    La task deve essere più lunga di 5 caratteri
+                </p>
             </div>
             <div class="wrapper_tasks">
                 <ul>
                     <li v-for="(task,index) in tasks" @click.stop="statusDone(index)"
                         :class="task.done===true?'text-decoration-line-through':''">
-                        {{task.text}} <span @click.stop="deleteLi(index)"><i
-                                class="fa-solid fa-x text-danger"></i></span> </li>
+
+                        {{task.text}}
+                        <span @click.stop="deleteLi(index)">
+                            <i class="fa-solid fa-x text-danger"></i>
+                        </span>
+
+                    </li>
                 </ul>
             </div>
 
