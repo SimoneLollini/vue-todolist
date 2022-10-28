@@ -21,7 +21,8 @@ createApp({
     data() {
         return {
             tasks,
-            newTask: ''
+            newTask: '',
+
         }
     },
     methods: {
@@ -30,14 +31,18 @@ createApp({
         //     console.log(this.tasks);
         // }
         addTask() {
-            // console.log(this.tasks);
-            // console.log(this.newTask);
-            // this.tasks.push(this.newTask);
-            this.tasks.push({
+            this.tasks.unshift({
                 text: this.newTask,
                 done: false
             })
 
+        },
+        statusDone(index) {
+            this.tasks[index].done = true
+
+        },
+        deleteLi(index) {
+            this.tasks.splice(index, 1)
         }
     },
 }).mount('#app')
